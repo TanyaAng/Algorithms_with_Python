@@ -14,7 +14,7 @@ def calculate_total_paths_to_end_point(row, col, matrix, end_row, end_col, count
         return
     if row == end_row and col == end_col:
         matrix[row][col] = '*'
-        counter.append(1)
+        counter.append('Found path')
         matrix[row][col] = '-'
     else:
         # mark cells
@@ -33,7 +33,6 @@ matrix = []
 
 for i in range(m):
     matrix.append(['-' for j in range(n)])
-# print_matrix(matrix)
 start_point = (0, 0)
 end_row, end_col = m - 1, n - 1
 
