@@ -8,24 +8,35 @@ def is_idx_out_of_range(row, col, matrix):
         return True
     return False
 
+# VARIANT I
+# def all_paths_to_end_point(row, col, matrix, end_row, end_col, counter=[]):
+#     if is_idx_out_of_range(row, col, matrix) or matrix[row][col] == '*':
+#         return
+#     if row == end_row and col == end_col:
+#         matrix[row][col] = '*'
+#         counter.append('Found path')
+#         matrix[row][col] = '-'
+#     else:
+#         # mark cells
+#         matrix[row][col] = '*'
+#         all_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
+#         # backtracking
+#         all_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
+#         # unmark cells
+#         matrix[row][col] = '-'
+#
+#     return len(counter)
 
+# VARIANT II
 def all_paths_to_end_point(row, col, matrix, end_row, end_col, counter=[]):
-    if is_idx_out_of_range(row, col, matrix) or matrix[row][col] == '*':
-        return
+    if is_idx_out_of_range(row, col, matrix):
+        return 0
     if row == end_row and col == end_col:
-        matrix[row][col] = '*'
-        counter.append('Found path')
-        matrix[row][col] = '-'
-    else:
-        # mark cells
-        matrix[row][col] = '*'
-        all_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
-        # backtracking
-        all_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
-        # unmark cells
-        matrix[row][col] = '-'
-
-    return len(counter)
+        return 1
+    result=0
+    result+=all_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
+    result+=all_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
+    return result
 
 
 m = int(input())
