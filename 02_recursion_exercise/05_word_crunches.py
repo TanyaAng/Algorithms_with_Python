@@ -1,21 +1,48 @@
-def find_matches(text, word, vector, idx=0):
-    if text == [] or len(word) == sum(len(x) for x in vector):
-        print(*vector, sep=' ')
+def find_all_solutions(idx, target, words_by_idx, words_count, used_words):
+    if idx >= len(target):
+        print(' '.join(used_words))
         return
-    if word.startswith(text[idx]):
-        first_word = text[idx]
-        text.remove(first_word)
-        vector.append(first_word)
-        find_matches(text, word[len(first_word):], vector, idx=0)
-    else:
-        find_matches(text, word, vector, idx + 1)
+    if idx not in words_by_idx:
+        return
+    for word in words_by_idx[idx]:
+        if words_count[word]==0:
+            continue
+        used_words.append(word)
+        words_count[word] -= 1
+
+        find_all_solutions(idx + len(word), target, words_by_idx, words_count, used_words)
+
+        # backtracking
+        used_words.pop()
+        words_count[word] += 1
 
 
-text = input().split(', ')
-searched_word = input()
-vector = []
+words = input().split(', ')
+target = input()
 
-find_matches(text, searched_word, vector)
+words_by_idx = {}
+words_count = {}
 
-# text=['asd','asd','a']
-# print(sum(len(x) for x in text))
+for word in words:
+    if word in words_count:
+        words_count[word] += 1
+        continue
+    words_count[word] = 1
+
+    try:
+        idx = 0
+        while True:
+            idx = target.index(word, idx)
+
+            if idx not in words_by_idx:
+                words_by_idx[idx] = []
+            words_by_idx[idx].append(word)
+            idx += len(word)
+    except ValueError:
+        pass
+
+# print(words_by_idx)
+# print(words_count)
+
+
+find_all_solutions(0, target, words_by_idx, words_count, [])
