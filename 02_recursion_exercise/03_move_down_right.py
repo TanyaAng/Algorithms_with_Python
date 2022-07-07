@@ -20,6 +20,7 @@ def calculate_total_paths_to_end_point(row, col, matrix, end_row, end_col, count
         # mark cells
         matrix[row][col] = '*'
         calculate_total_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
+        # backtracking
         calculate_total_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
         # unmark cells
         matrix[row][col] = '-'
