@@ -38,7 +38,7 @@ for word in words:
                 words_by_idx[idx] = []
             words_by_idx[idx].append(word)
             idx += len(word)
-    except ValueError:
+    except  ValueError:
         pass
 
 # print(words_by_idx)
