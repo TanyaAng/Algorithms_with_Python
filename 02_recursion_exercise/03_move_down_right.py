@@ -9,7 +9,7 @@ def is_idx_out_of_range(row, col, matrix):
     return False
 
 
-def calculate_total_paths_to_end_point(row, col, matrix, end_row, end_col, counter=[]):
+def all_paths_to_end_point(row, col, matrix, end_row, end_col, counter=[]):
     if is_idx_out_of_range(row, col, matrix) or matrix[row][col] == '*':
         return
     if row == end_row and col == end_col:
@@ -19,9 +19,9 @@ def calculate_total_paths_to_end_point(row, col, matrix, end_row, end_col, count
     else:
         # mark cells
         matrix[row][col] = '*'
-        calculate_total_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
+        all_paths_to_end_point(row + 1, col, matrix, end_row, end_col, counter=counter)
         # backtracking
-        calculate_total_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
+        all_paths_to_end_point(row, col + 1, matrix, end_row, end_col, counter=counter)
         # unmark cells
         matrix[row][col] = '-'
 
@@ -37,4 +37,4 @@ for i in range(m):
 start_point = (0, 0)
 end_row, end_col = m - 1, n - 1
 
-print(calculate_total_paths_to_end_point(0, 0, matrix, end_row, end_col))
+print(all_paths_to_end_point(0, 0, matrix, end_row, end_col))
