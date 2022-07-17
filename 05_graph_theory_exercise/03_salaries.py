@@ -33,7 +33,7 @@ for i in range(n):
         if employee_matrix[i][j] == 'Y':
             graph[i].append(j)
 
-dependencies = find_dependencies(employee_matrix)
+# dependencies = find_dependencies(employee_matrix)
 total_salaries = 0
 
 for node in graph.keys():
