@@ -1,58 +1,46 @@
-def find_dependencies(graph):
-    result = {}
-    for node, children in graph.items():
-        if node not in result:
-            result[node] = len(children)
-    return result
+def dfs(source, destination, graph, visited):
+    if source in visited:
+        return
+    visited.add(source)
+    if source == destination:
+        return
+    for child in graph[source]:
+        dfs(child, destination, graph, visited)
 
 
-def find_node_with_only_one_path(graph):
-    for node, dependencies in graph.items():
-        if dependencies > 1:
-            return node
-
-
-def sort_by_paths(graph):
-    sorted_graph = {}
-    for key, value in sorted(graph.items(), key=lambda kvp: -len(kvp[1])):
-        sorted_graph[key] = value
-    return sorted_graph
+def path_exists(source, destination):
+    visited = set()
+    dfs(source, destination, graph, visited)
+    return destination in visited
 
 
 n = int(input())
 
 graph = {}
+
+edges = []
 for _ in range(n):
     command = input()
-    parent, children = command.split('->')
-    parent = parent.strip()
+    parent, children = command.split(' -> ')
     if parent not in graph:
         graph[parent] = []
-    children = children.strip()
     graph[parent] = children.split()
+    for child in children:
+        edges.append((parent, child))
 
-sorted_graph = sort_by_paths(graph)
-print(sorted_graph)
-dependencies = find_dependencies(sorted_graph)
-print(dependencies)
-node_with_many_paths = find_node_with_only_one_path(dependencies)
+removed_edges = []
+for source, destination in sorted(edges, key=lambda item: (item[0], item[1])):
+    if destination not in graph[source] or source not in graph[destination]:
+        continue
+    graph[source].remove(destination)
+    graph[destination].remove(source)
 
-has_cycles = True
-nodes_to_remove = []
-while graph:
-    if node_with_many_paths == None:
-        has_cycles = False
-        break
-    value_to_remove = graph[node_with_many_paths][0]
-    del graph[node_with_many_paths]
-    for key, values in graph.items():
-        for v in values:
-            if v == node_with_many_paths or v == value_to_remove:
-                values.remove(v)
-    nodes_to_remove.append((value_to_remove, node_with_many_paths))
-    dependencies = find_dependencies(graph)
-    node_with_many_paths = find_node_with_only_one_path(dependencies)
+    if path_exists(source, destination):
+        removed_edges.append((source, destination))
+    else:
+        graph[source].append(destination)
+        graph[destination].append(source)
 
-print("Important streets:")
-for node in sorted(nodes_to_remove):
-    print(f"{node[0]} {node[1]}")
+print(f"Edges to remove: {len(removed_edges)}")
+for edge in removed_edges:
+    print(f"{edge[0]} - {edge[1]}")
