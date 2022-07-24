@@ -18,6 +18,9 @@ for _ in range(edges):
     graph.append(Edge(first, second, weight))
     max_node = max(first, second, max_node)
 
+# for edge in sorted(graph, key=lambda e: e.weight):
+#     print(edge.__dict__)
+
 parent = [num for num in range(max_node + 1)]
 # print(parent)
 forest = []
