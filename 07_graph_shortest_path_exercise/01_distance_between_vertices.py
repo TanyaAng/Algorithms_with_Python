@@ -15,6 +15,15 @@ def bfs(queue, destination, graph, visited, parent):
             parent[child] = node
 
 
+def find_path_size(parent, destination):
+    node = destination
+    size = 0
+    while node is not None:
+        node = parent[node]
+        size += 1
+    return size - 1
+
+
 # INPUTS
 vertices = int(input())
 pairs = int(input())
@@ -30,32 +39,17 @@ for _ in range(vertices):
     for child in children:
         graph[parent].append(child)
 
-#print(graph)
+# print(graph)
 
-target_nodes = []
 for _ in range(pairs):
-    first, second = [int(x) for x in input().split('-')]
-    target_nodes.append((first, second))
-
-# print(target_nodes)
-
-# BUSINESS LOGIC
-for node in target_nodes:
-    start, destination = node
+    start, destination = [int(x) for x in input().split('-')]
     visited = {node: False for node in graph.keys()}
     parent = {node: None for node in graph.keys()}
     visited[start] = True
     queue = deque([start])
     bfs(queue, destination, graph, visited, parent)
-
     if parent[destination] is None:
         print(f"{{{start}, {destination}}} -> -1")
         continue
-
-    path = deque()
-    node = destination
-    while node is not None:
-        path.appendleft(node)
-        node = parent[node]
-    lenght = len(path) - 1
-    print(f"{{{start}, {destination}}} -> {lenght}")
+    size = find_path_size(parent, destination)
+    print(f"{{{start}, {destination}}} -> {size}")
