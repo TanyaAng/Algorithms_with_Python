@@ -30,7 +30,7 @@ for _ in range(vertices):
     for child in children:
         graph[parent].append(child)
 
-# print(graph)
+#print(graph)
 
 target_nodes = []
 for _ in range(pairs):
@@ -56,6 +56,4 @@ for node in target_nodes:
     lenght = len(path) - 1
     if start not in path or destination not in path:
         lenght = -1
-    prefix = '{'
-    suffix = '}'
-    print(f"{prefix}{start}, {destination}{suffix} -> {lenght}")
+    print(f"{{{start}, {destination}}} -> {lenght}")
