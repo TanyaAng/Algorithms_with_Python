@@ -52,6 +52,7 @@ while not pq.empty():
         break
     max_destination = None
     for edge in graph[node]:
+        # child = edge.destination if edge.source == node else edge.source
         new_reliability = max_reliability * convert_from_percent(edge.weight)
         if new_reliability > reliability[node] and not visited[edge.destination]:
             reliability[node] = new_reliability
@@ -62,9 +63,10 @@ while not pq.empty():
 
 print(f"Most reliable path reliability: {max_reliability * 100:.2f}%")
 
-path=deque()
-node=destination
+
+path = deque()
+node = destination
 while node is not None:
     path.appendleft(node)
-    node=parent[node]
+    node = parent[node]
 print(*path, sep=' -> ')
