@@ -48,12 +48,14 @@ for node in target_nodes:
     queue = deque([start])
     bfs(queue, destination, graph, visited, parent)
 
+    if parent[destination] is None:
+        print(f"{{{start}, {destination}}} -> -1")
+        continue
+
     path = deque()
     node = destination
     while node is not None:
         path.appendleft(node)
         node = parent[node]
     lenght = len(path) - 1
-    if start not in path or destination not in path:
-        lenght = -1
     print(f"{{{start}, {destination}}} -> {lenght}")
