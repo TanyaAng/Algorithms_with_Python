@@ -38,4 +38,4 @@ while best_idx is not None:
     result.appendleft(string_chain[best_idx])
     best_idx = parent[best_idx]
 
-print(*result,sep=' ')
+print(*result, sep=' ')
