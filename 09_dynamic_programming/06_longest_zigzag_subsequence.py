@@ -1,45 +1,48 @@
 from collections import deque
-sequence = [int(x) for x in input().split()]
 
-lenght = len(sequence)
-size = [0] * lenght
-parent = [None] * lenght
-parent[0]=sequence[0]
+nums = [int(x) for x in input().split()]
 
-size[0] = 1
-best_idx = 0
-bes_size = 0
+dp = []
+for _ in range(2):
+    dp.append([0] * len(nums))
 
-for idx in range(1, lenght):
-    current_number = sequence[idx]
-    current_best_size = 1
-    current_parent = None
+dp[0][0] = dp[1][0] = 1
 
-    for prev in range(idx - 1, -1, -1):
-        prev_number = sequence[prev]
+parent = []
+for _ in range(2):
+    parent.append([None] * len(nums))
 
-        if prev_number >= current_number:
-            parent[prev]=sequence[prev]
-            continue
+best_size = 1
+best_col = 0
+best_row = 0
+for current in range(1, len(nums)):
+    current_number = nums[current]
 
-        if size[prev] + 1 >= current_best_size:
-            current_best_size = size[prev] + 1
-            current_parent = sequence[prev]
+    for prev in range(current - 1, -1, -1):
+        prev_number = nums[prev]
 
-    size[idx] = current_best_size
-    parent[idx] = current_parent
-    if current_best_size > bes_size:
-        best_size = current_best_size
-        best_idx = idx
+        if current_number > prev_number and dp[1][prev] + 1 >= dp[0][current]:
+            dp[0][current] = dp[1][prev] + 1
+            parent[0][current] = prev
 
-print(sequence)
-print(size)
-print(best_idx)
-print(parent)
 
-# result=deque()
-# while best_idx is not None:
-#     result.appendleft(sequence[best_idx])
-#     best_idx=parent[best_idx]
-#
-# print(*result, sep=' ')
+        elif current_number < prev_number and dp[0][prev] + 1 >= dp[1][current]:
+            dp[1][current] = dp[0][prev] + 1
+            parent[1][current] = prev
+
+    if dp[0][current] > best_size:
+        best_size = dp[0][current]
+        best_col = current
+        best_row = 0
+    if dp[1][current] > best_size:
+        best_size = dp[1][current]
+        best_col = current
+        best_row = 1
+
+result = deque()
+while best_col is not None:
+    result.appendleft(nums[best_col])
+    best_col = parent[best_row][best_col]
+    best_row = 1 if best_row == 0 else 0
+
+print(*result, sep=' ')
