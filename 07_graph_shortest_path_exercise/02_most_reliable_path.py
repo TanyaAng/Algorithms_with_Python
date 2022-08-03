@@ -31,9 +31,6 @@ for _ in range(edges):
 start = int(input())
 destination = int(input())
 
-# for node, edges in graph.items():
-#     for edge in edges:
-#         print(f"{node} -> {edge.__dict__}")
 
 reliability = {node: float('-inf') for node in graph}
 parent = {node: None for node in graph}
@@ -52,7 +49,6 @@ while not pq.empty():
         break
     max_destination = None
     for edge in graph[node]:
-        # child = edge.destination if edge.source == node else edge.source
         new_reliability = max_reliability * convert_from_percent(edge.weight)
         if new_reliability > reliability[node] and not visited[edge.destination]:
             reliability[node] = new_reliability
@@ -62,7 +58,6 @@ while not pq.empty():
     visited[max_destination] = True
 
 print(f"Most reliable path reliability: {max_reliability * 100:.2f}%")
-
 
 path = deque()
 node = destination

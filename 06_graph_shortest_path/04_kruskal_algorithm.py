@@ -22,7 +22,6 @@ for _ in range(edges):
 #     print(edge.__dict__)
 
 parent = [num for num in range(max_node + 1)]
-# print(parent)
 forest = []
 for edge in sorted(graph, key=lambda e: e.weight):
     first_node_root = find_root(parent, edge.first)
@@ -31,5 +30,6 @@ for edge in sorted(graph, key=lambda e: e.weight):
         parent[first_node_root] = second_node_root
         forest.append(edge)
 
+print(parent)
 for edge in forest:
     print(f'{edge.first} - {edge.second}')

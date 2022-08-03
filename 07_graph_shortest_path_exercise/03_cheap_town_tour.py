@@ -1,3 +1,5 @@
+# Kruskal Algorithm
+
 class Edge:
     def __init__(self, source, destination, weight):
         self.source = source
