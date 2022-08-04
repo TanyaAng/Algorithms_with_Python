@@ -19,5 +19,4 @@ numbers = [int(x) for x in input().split(', ')]
 result = iterative_power_set(numbers)[1:]
 
 print()
-for set in sorted(result, key=lambda x: (len(x), x[0], x[-1])):
-    print(*set, sep=' ')
+[print(*set, sep=' ') for set in sorted(result, key=lambda x: (len(x), x[0], x[-1]))]
