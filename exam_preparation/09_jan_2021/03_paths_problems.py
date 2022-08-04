@@ -19,35 +19,33 @@ for node in range(nodes):
     graph[node] = children
 
 target = max(graph.keys())
-# outer_graph = copy(graph)
 result = []
 for x in range(len(graph) - 1):
+    # ====== FIRST FIND IF PATH FROM EVERY START NODE TO THE END NODE
     dfs_result = dfs(x, graph, set(), [])
-    if dfs_result:
+    if dfs_result and dfs_result not in result:
         result.append(dfs_result)
 
-
+    # ======= THEN FIND IF IS THERE A PATH FROM START NODE, WHEN WE REMOVE NODE BY NODE TO THE END
+    # WE NEED TO COPY THE ORIGINAL GRAPH, BECAUSE WE DON'T WANT TO CHANGE IT
     inner_graph = copy(graph)
     for y in range(x + 1, target):
         inner_graph.pop(y)
         visited = set()
         dfs_result = dfs(x, inner_graph, set(), [])
-        if dfs_result:
+        if dfs_result and dfs_result not in result:
             result.append(dfs_result)
 
+    # FINALLY WE TRY TO FIND PATH IF ANY OF ANOTHER NODE IS REMOVED ONE BY ONE
+    # WE NEED TO COPY THE ORIGINAL GRAPH EVERY TIME BEFORE WE REMOVE NODE
     for y in range(x + 1, target):
         inner_graph = copy(graph)
         inner_graph.pop(y)
         visited = set()
         dfs_result = dfs(x, inner_graph, set(), [])
-        if dfs_result:
+        if dfs_result and dfs_result not in result:
             result.append(dfs_result)
-
     graph.pop(x)
 
-unique_results = []
-for r in result:
-    if r not in unique_results:
-        unique_results.append(r)
 
-[print(*result, sep=' ') for result in sorted(unique_results, key=lambda x: (x[0], -len(x), x[1]))]
+[print(*r, sep=' ') for r in sorted(result, key=lambda x: (x[0], -len(x), x[1]))]
