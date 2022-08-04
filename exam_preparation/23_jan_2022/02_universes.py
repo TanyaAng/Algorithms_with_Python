@@ -10,7 +10,7 @@ nodes = set()
 edges = []
 
 for _ in range(lines):
-    first, second = input().split()
+    first, second = input().split(' - ')
     edge = (first, second)
     edges.append((first,second))
     nodes.add(first)
