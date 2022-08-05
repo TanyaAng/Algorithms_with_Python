@@ -1,5 +1,3 @@
-import numpy as np
-
 '''Not the appropriate solution'''
 # def find_super_set(idx, collection, subset):
 #     if is_unique_elements(subset):

@@ -19,5 +19,3 @@ n = int(input())
 used = [False] * len(symbols)
 vector = [None] * n
 find_nuclear(0, symbols, vector)
-
-

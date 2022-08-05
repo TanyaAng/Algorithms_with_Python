@@ -39,7 +39,6 @@ def prim(node, damage, damage_by_node, graph):
             continue
 
         else:
-
             tree.add(non_tree_node)
             [pq.put(edge) for edge in graph[non_tree_node]]
             jumps[non_tree_node] = jumps[tree_node] + 1
