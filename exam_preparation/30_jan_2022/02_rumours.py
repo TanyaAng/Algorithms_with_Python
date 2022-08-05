@@ -26,9 +26,6 @@ for _ in range(edges):
     graph[second].append(first)
 
 start_node = int(input())
-# print(graph)
-forest = set()
-forest_edges = []
 
 result = []
 for node in graph:

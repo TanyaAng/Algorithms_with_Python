@@ -16,22 +16,18 @@ for _ in range(edges):
 # print(graph)
 
 start_node = int(input())
-forest = set()
-forest_edges = []
+target_node = int(input())
+visited = {node: False for node in graph}
+parent = {node: None for node in graph}
 
-unreacheble_spots = []
 for node in graph:
     if node == start_node:
         continue
-    destination = node
-    visited = {node: False for node in graph}
-    parent = {node: None for node in graph}
-
     visited[start_node] = True
     queue = deque([start_node])
     while queue:
         node = queue.popleft()
-        if node == destination:
+        if node == target_node:
             break
         for child in graph[node]:
             if visited[child]:
@@ -40,14 +36,16 @@ for node in graph:
             queue.append(child)
             parent[child] = node
 
-    path = deque()
-    node = destination
-    while node is not None:
-        path.appendleft(node)
-        node = parent[node]
-    # print(f"{start_node} -> {destination} ({len(path)-1})")
-    if len(path) - 1 == 0:
-        unreacheble_spots.append(destination)
+path = deque()
+node = target_node
+while node is not None:
+    path.appendleft(node)
+    node = parent[node]
+print(*path, sep=' ')
 
-for node in sorted(unreacheble_spots):
-    print(node)
+unreached_nodes = []
+for key in graph.keys():
+    if key not in path:
+        unreached_nodes.append(key)
+if unreached_nodes:
+    print(*sorted(unreached_nodes), sep=' ')
