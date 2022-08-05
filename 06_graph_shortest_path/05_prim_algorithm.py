@@ -57,6 +57,7 @@ def prim(node, graph, forest, forest_edges):
             pq.put(edge)
 
 
+
 for node in graph:
     if node in forest:
         continue
