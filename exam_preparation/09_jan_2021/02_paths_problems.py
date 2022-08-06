@@ -21,7 +21,7 @@ for node in range(nodes):
 target = max(graph.keys())
 result = []
 for x in range(len(graph) - 1):
-    # ====== FIRST FIND IF PATH FROM EVERY START NODE TO THE END NODE
+    # ====== FIRST FIND IF THERE IS A PATH FROM EVERY START NODE TO THE END NODE
     dfs_result = dfs(x, graph, set(), [])
     if dfs_result and dfs_result not in result:
         result.append(dfs_result)
