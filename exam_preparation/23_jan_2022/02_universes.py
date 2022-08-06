@@ -45,10 +45,10 @@ def dfs(node, graph, visited, universe):
     if visited[node]:
         return
     visited[node] = True
-    universe.append(node)
+
     for child in graph[node]:
         dfs(child, graph, visited, universe)
-    return universe
+    universe.append(node)
 
 
 lines = int(input())
@@ -68,8 +68,9 @@ visited = {node: False for node in graph}
 for node in graph:
     if visited[node]:
         continue
-    current_universe = dfs(node, graph, visited, [])
-    # print(*current_universe, sep=' ')
+    current_universe = []
+    dfs(node, graph, visited, current_universe)
+    print(*current_universe, sep=' ')
     universe_counter += 1
 
 print(universe_counter)
