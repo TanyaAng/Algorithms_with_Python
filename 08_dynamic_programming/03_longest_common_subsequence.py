@@ -1,3 +1,8 @@
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
+
 first = input()
 second = input()
 rows = len(first) + 1
@@ -5,6 +10,7 @@ cols = len(second) + 1
 
 dp = []
 [dp.append([0] * cols) for _ in range(rows)]
+print_matrix(dp)
 
 for row in range(1, rows):
     for col in range(1, cols):
@@ -12,6 +18,8 @@ for row in range(1, rows):
             dp[row][col] = dp[row - 1][col - 1] + 1
         else:
             dp[row][col] = max(dp[row - 1][col], dp[row][col - 1])
+        # print('========')
+        # print_matrix(dp)
 
 print(dp[rows - 1][cols - 1])
 
@@ -26,6 +34,6 @@ while row > 0 and col > 0:
     elif dp[row - 1][col] > dp[row][col - 1]:
         row -= 1
     else:
-        col-=1
+        col -= 1
 
 # print(list(reversed(result)))
