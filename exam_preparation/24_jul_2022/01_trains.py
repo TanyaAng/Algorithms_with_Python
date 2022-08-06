@@ -10,11 +10,13 @@ i = 1
 j = 0
 
 while i < lenght and j < lenght:
-    if arrivals[i] < departures[j]:
+    arrival_train=arrivals[i]
+    departure_train=departures[j]
+    if arrival_train < departure_train:
         platform_needed += 1
         i += 1
 
-    elif arrivals[i] >= departures[j]:
+    elif arrival_train >= departure_train:
         platform_needed -= 1
         j += 1
 
