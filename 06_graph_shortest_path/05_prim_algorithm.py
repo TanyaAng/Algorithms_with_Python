@@ -11,28 +11,6 @@ class Edge:
         return self.weight > other.weight
 
 
-edges = int(input())
-
-graph = {}
-
-for _ in range(edges):
-    first, second, weight = [int(x) for x in input().split(', ')]
-    if first not in graph:
-        graph[first] = []
-    if second not in graph:
-        graph[second] = []
-    edge = Edge(first, second, weight)
-    graph[first].append(edge)
-    graph[second].append(edge)
-
-# for key, value in graph.items():
-#     for v in value:
-#         print(f"{key} -> {v.first}, {v.second}, {v.weight}")
-
-forest = set()
-forest_edges = []
-
-
 def prim(node, graph, forest, forest_edges):
     forest.add(node)
     pq = PriorityQueue()
@@ -52,11 +30,28 @@ def prim(node, graph, forest, forest_edges):
 
         forest.add(non_tree_node)
         forest_edges.append(min_edge)
-
         for edge in graph[non_tree_node]:
             pq.put(edge)
 
 
+edges = int(input())
+graph = {}
+for _ in range(edges):
+    first, second, weight = [int(x) for x in input().split(', ')]
+    if first not in graph:
+        graph[first] = []
+    if second not in graph:
+        graph[second] = []
+    edge = Edge(first, second, weight)
+    graph[first].append(edge)
+    graph[second].append(edge)
+
+# for key, value in graph.items():
+#     for v in value:
+#         print(f"{key} -> {v.first}, {v.second}, {v.weight}")
+
+forest = set()
+forest_edges = []
 
 for node in graph:
     if node in forest:

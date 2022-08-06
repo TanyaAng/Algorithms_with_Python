@@ -4,6 +4,7 @@ class Edge:
         self.second = second
         self.weight = weight
 
+
 def find_root(parent, node):
     while node != parent[node]:
         node = parent[node]
@@ -21,15 +22,15 @@ for _ in range(edges):
 # for edge in sorted(graph, key=lambda e: e.weight):
 #     print(edge.__dict__)
 
-parent = [num for num in range(max_node + 1)]
-forest = []
+parent = {num: num for num in range(max_node + 1)}
+forest_edges = []
 for edge in sorted(graph, key=lambda e: e.weight):
     first_node_root = find_root(parent, edge.first)
     second_node_root = find_root(parent, edge.second)
     if first_node_root != second_node_root:
         parent[first_node_root] = second_node_root
-        forest.append(edge)
+        forest_edges.append(edge)
 
 print(parent)
-for edge in forest:
+for edge in forest_edges:
     print(f'{edge.first} - {edge.second}')
