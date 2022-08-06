@@ -1,3 +1,9 @@
+'''
+TASK: The graph is directed.
+SOLUTION: so find all nodes to which there is path with len==0.
+IMPLEMENTATION: Shortest path of unweighted graph - BFS and queue
+'''
+
 from collections import deque
 
 nodes = int(input())
@@ -13,13 +19,11 @@ for _ in range(edges):
         graph[second] = []
     graph[first].append(second)
 
-# print(graph)
+print(graph)
 
 start_node = int(input())
-forest = set()
-forest_edges = []
-
 unreacheble_spots = []
+
 for node in graph:
     if node == start_node:
         continue
@@ -45,7 +49,7 @@ for node in graph:
     while node is not None:
         path.appendleft(node)
         node = parent[node]
-    # print(f"{start_node} -> {destination} ({len(path)-1})")
+    print(f"{start_node} -> {destination} Parent{parent} ({len(path)-1})")
     if len(path) - 1 == 0:
         unreacheble_spots.append(destination)
 
