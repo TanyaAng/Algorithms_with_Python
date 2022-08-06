@@ -62,13 +62,14 @@ for _ in range(lines):
     graph[first].append(second)
     graph[second].append(first)
 
+# print(graph)
 universe_counter = 0
 visited = {node: False for node in graph}
 for node in graph:
     if visited[node]:
         continue
     current_universe = dfs(node, graph, visited, [])
-    print(*current_universe, sep=' ')
+    # print(*current_universe, sep=' ')
     universe_counter += 1
 
 print(universe_counter)
