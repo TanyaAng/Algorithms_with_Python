@@ -35,8 +35,9 @@
 # print(counter)
 
 
-# VARIANT II
-'''For every node in graph start DFS,
+'''
+VARIANT II - the appropriate
+For every node in graph start DFS,
 every time you start another DFS it means
 that it is found another unconnected graph'''
 
@@ -45,7 +46,6 @@ def dfs(node, graph, visited, universe):
     if visited[node]:
         return
     visited[node] = True
-
     for child in graph[node]:
         dfs(child, graph, visited, universe)
     universe.append(node)
