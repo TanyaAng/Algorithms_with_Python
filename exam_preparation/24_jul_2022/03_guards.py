@@ -1,6 +1,6 @@
 '''
-TASK: The graph is directed.
-SOLUTION: so find all nodes to which there is path with len==0.
+TASK: The graph is directed and unweighted.
+SOLUTION: Find all nodes to which there is path with len==0.
 IMPLEMENTATION: Shortest path of unweighted graph - BFS and queue
 '''
 
