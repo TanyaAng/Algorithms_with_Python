@@ -20,8 +20,3 @@ def string_mashup(string, result):
 result = set()
 string_mashup('x1y2z', result)
 print(*result, sep='\n')
-
-# print(1 >> 5)
-# print(1 / (2 ** 5))
-# print(1 << 5)
-# print(1 * (2 ** 5))
