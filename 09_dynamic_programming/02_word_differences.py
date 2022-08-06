@@ -1,3 +1,7 @@
+def print_matrix(matrix):
+    for row in matrix:
+        print(row)
+
 first = input()
 second = input()
 dp = []
@@ -19,4 +23,5 @@ for row in range(1, rows):
         else:
             dp[row][col] = min(dp[row][col - 1], dp[row - 1][col]) + 1
 
+print_matrix(dp)
 print(f"Deletions and Insertions: {dp[rows - 1][cols - 1]}")

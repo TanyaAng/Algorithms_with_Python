@@ -26,6 +26,7 @@ for row in range(1, rows):
         if first[row - 1] == second[col - 1]:
             dp[row][col] = dp[row - 1][col - 1]
         else:
-            dp[row][col] = min(dp[row][col - 1]+insert_cost, dp[row - 1][col] + delete_cost, dp[row-1][col-1]+replacement_cost)
+            dp[row][col] = min(dp[row][col - 1] + insert_cost, dp[row - 1][col] + delete_cost,
+                               dp[row - 1][col - 1] + replacement_cost)
 
 print(f"Minimum edit distance: {dp[rows - 1][cols - 1]}")
