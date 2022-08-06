@@ -38,7 +38,7 @@
 # VARIANT II
 '''For every node in graph start DFS,
 every time you start another DFS it means
-that is found another unconnected graph'''
+that it is found another unconnected graph'''
 
 
 def dfs(node, graph, visited, universe):
