@@ -36,10 +36,11 @@
 
 
 '''
-VARIANT II - the appropriate
-For every node in graph start DFS,
-every time you start another DFS it means
-that it is found another unconnected graph'''
+TASK: found the number of not connected graphs
+SOLUTION: For every node in graph start DFS
+(Topological sorting with DFS for undirected graphs).
+Every time when you start another DFS it means
+that it is found another unconnected graph.'''
 
 
 def dfs(node, graph, visited, universe):
