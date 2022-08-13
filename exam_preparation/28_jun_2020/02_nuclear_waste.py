@@ -34,7 +34,7 @@ packages_of_flasks = list(range(1, len(cost_of_flasks) + 1))
 result = {}
 
 subset_sum(packages_of_flasks, target, [], cost_of_flasks, result)
-
+# print(result)
 min_sum = min(result.keys())
 min_array = result[min_sum]
 print(f"Cost: {min_sum}")
